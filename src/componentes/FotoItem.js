@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class Foto extends Component {
+class FotoItem extends Component {
     render() {
         return (
             <div>
                 <div className="foto">
-                    <FotoHeader />
-                    <img alt="foto" className="foto-src" src="https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-15/e35/14482111_1635089460122802_8984023070045896704_n.jpg?ig_cache_key=MTM1MzEzNjM4NzAxMjIwODUyMw%3D%3D.2" />
+                    <FotoHeader jsonFoto={this.props.jsonFoto}/>
+                    <img alt="foto" className="foto-src" src={this.props.jsonFoto.urlFoto} />
                     <FotoInfo />
                     <FotoAtualizacoes />
                 </div>
@@ -20,12 +20,12 @@ class FotoHeader extends Component {
         return (
             <header className="foto-header">
                 <figure className="foto-usuario">
-                    <img src="https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg" alt="foto do usuario" />
+                    <img src={this.props.jsonFoto.urlPerfil} />
                     <figcaption className="foto-usuario">
-                        <a href="#">alots</a>
+                        <a href="#">{this.props.jsonFoto.loginUsuario}</a>
                     </figcaption>
                 </figure>
-                <time className="foto-data">03/10/2016 20:13</time>
+                <time className="foto-data">{this.props.jsonFoto.horario}</time>
             </header>
 
         )
@@ -74,4 +74,4 @@ class FotoAtualizacoes extends Component {
     }
 }
 
-export default Foto;
+export default FotoItem;
