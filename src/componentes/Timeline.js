@@ -8,7 +8,8 @@ export default class Timeline extends Component {
         this.state = {fotos:[]}; 
     }
     componentDidMount() {
-        fetch('http://localhost:8080/api/public/fotos/rafael')
+        // fetch('http://localhost:8080/api/public/fotos/rafael')
+        fetch('http://localhost:8080/api/public/fotos/alots')
         .then(response => response.json())
         .then(fotos => {
             this.setState({fotos:fotos});
@@ -19,7 +20,7 @@ export default class Timeline extends Component {
         return (
             <div className="fotos container">
                 {
-                    this.state.fotos.map(foto => <FotoItem jsonFoto={foto}/>)
+                    this.state.fotos.map(foto => <FotoItem key={foto.id} jsonFoto={foto}/>)
                 }
             </div>
         )
