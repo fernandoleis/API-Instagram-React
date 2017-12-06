@@ -6,7 +6,8 @@ import './css/reset.css';
 import './css/login.css';
 import './css/timeline.css';
 import App from './App';
-import Login from './componentes/Login.js'
+import Login from './componentes/Login';
+import Logout from './componentes/Logout';
 
 
 ReactDOM.render(
@@ -14,16 +15,13 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Login} />
-                {/* <Route path="/logout" component={Logout} /> */}
-                {/* <Route exact path="/timeline" component={App} /> */}
-                <Route exact path="/timeline" component={App} />
-                <Route exact path="/timeline" render={() => (
-                    isLoggedIn() ? (
-                        <Redirect to="/?msg=Você precisa estar logado para acessar o endereço" />
-                    ) : (
-                            <App />
-                        )
-                )} />
+                <Route path="/logout" component={Logout} />
+                <Route exact path="/timeline" render={() => (isLoggedIn() ?
+                    (<Redirect to={{
+                        pathname: '/',
+                        state: { errorMessage: 'usuário não autenticado' }
+                    }} />) :
+                    (<App />))} />
             </Switch>
         </BrowserRouter>
     ),

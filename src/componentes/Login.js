@@ -5,15 +5,26 @@ export default class Login extends Component {
 
     constructor(props) {
         super(props);
-
-        var msg = '';
-        const queryParams = new URLSearchParams(props.location.search);
-        const queryMsg = queryParams.get('msg');
-        if (queryMsg) {
-            msg = queryMsg;
+        var msg;
+        if (this.props.location.state === undefined) {
+            msg = "";
+        } else {
+            msg = this.props.location.state.errorMessage;
         }
-
         this.state = { msg: msg };
+        console.log("msg" + msg);
+
+        // outra forma de fazer
+        // const queryParams = new URLSearchParams(props.location.search);
+        // const queryMsg = queryParams.get('msg');
+        // if (queryMsg) {
+        //     msg = queryMsg;
+        // }
+
+        // outra forma de resolver a questa de pegar a mensagem na url
+        // const queryString = require('query-string');
+        // const mensagem = queryString.parse(props.location.search);
+        // console.log(mensagem);
     }
 
     envia(event) {
@@ -36,7 +47,7 @@ export default class Login extends Component {
             })
             .then(token => {
                 console.log(token);
-                localStorage.setItem('auth-token',token);
+                localStorage.setItem('auth-token', token);
                 this.props.history.push('/timeline');
                 // R    edirect.push('/timeline');
                 // <Redirect pushto='/timeline'/>
