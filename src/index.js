@@ -15,16 +15,20 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={Login} />
                 {/* <Route path="/logout" component={Logout} /> */}
-                <Route exact path="/timeline" component={App}/>
-                {/* <Route exact path="/timeline" render={() => (
+                {/* <Route exact path="/timeline" component={App} /> */}
+                <Route exact path="/timeline" component={App} />
+                <Route exact path="/timeline" render={() => (
                     isLoggedIn() ? (
                         <Redirect to="/?msg=Você precisa estar logado para acessar o endereço" />
                     ) : (
                             <App />
                         )
-                )} /> */}
+                )} />
             </Switch>
         </BrowserRouter>
     ),
     document.getElementById('root')
 );
+function isLoggedIn() {
+    return localStorage.getItem('auth-token') === null;
+}
